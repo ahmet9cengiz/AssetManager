@@ -100,9 +100,9 @@
         </ul>
       </div>
     </div>
-  </nav>    
+  </nav>
   <div class="container text-center">
-    <div class="box"> 
+    <div class="box">
       <legend><h3><span>Current Count</span></h3></legend>
       <div class="row">
         <div class="col-4">
@@ -132,7 +132,7 @@
     </div>
     <div class="box">
       <legend><h3><span>Verify Assets</span></h3></legend>
-      <table id="verify-table" class="table table-bordered dt-responsive nowrap" style="width:100%">
+      <table id="verify-table" class="table table-striped table-bordered nowrap">
         <thead>
           <tr>
             <th>Service Tag</th>
@@ -155,7 +155,7 @@
           ?>
         </tbody>
       </table>
-    </div>  
+    </div>
   </div>
 </body>
 </html>

@@ -120,7 +120,7 @@
 
     //trigger the change event on manufacturer dropdown to load models
     $("#add-manufacturer").trigger('change');
-    
+
 
     function preselectModel(){
       //preselect if duplicate
@@ -141,7 +141,7 @@
 
       }
     }
-    
+
 
     setTimeout(preselectModel, 500);
 
@@ -235,17 +235,17 @@
       </div>
     </div>
   </nav>
-  <div clas="container text-center">
+  <div class="container text-center">
     <div class="box">
-      <div class="tabs style-tabs" id="tabs">
+      <div class="nav-tabs" id="tabs">
         <ul>
-          <li><a href="#add-asset">Add Item</a></li>
-          <li><a href="#update-asset">Update Item</a></li>
-          <li><a href="#delete-asset">Delete Item</a></li>
+          <li style="float: none; display: inline-block;"><a href="#add-asset">Add Item</a></li>
+          <li style="float: none; display: inline-block;"><a href="#update-asset">Update Item</a></li>
+          <li style="float: none; display: inline-block;"><a href="#delete-asset">Delete Item</a></li>
         </ul>
         <div id="add-asset">
           <form action="process/asset-process.php" method ="POST">
-            <div class="row">
+            <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
                 <label for="service-tag">Service Tag</label>
                 <input type="text" class="form-control" name="service-tag" id="service-tag" required>
@@ -281,10 +281,10 @@
                 <select id = "model" class="form-control" name = "model" required>
                   <option disabled = "" selected = "">Select Model</option>
                 </select>
-              </div>  
+              </div>
             </div>
-            <div class="row">
-              <div class="form-group col-3"> 
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="form-group col-3">
                 <label for="add-location">Location</label>
                 <select id="add-location" class="form-control" name="add-location">
                   <option disabled="" selected="">Select location</option>
@@ -310,17 +310,17 @@
                   ?>
                 </select>
               </div>
-              <div class="form-group col-3">  
+              <div class="form-group col-3">
                 <label for="purchase-date">Purchase Date</label>
                 <input type="date" name="purchase-date" class="form-control" value="<?php echo ($purchase == NULL) ? "" : $purchase; ?>" required>
               </div>
-              <div class="form-group col-3">  
+              <div class="form-group col-3">
                 <label for="warranty">Warranty(in years)</label>
                 <input type="number" name="warranty" class="form-control" value="<?php echo ($warranty == NULL) ? "" : $warranty; ?>" min="0" required>
               </div>
             </div>
-            <div class="row">
-              <div class="form-group col-4">
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="form-group col-3">
                 <label for='verification-days'>Verification Days</label>
                 <input type="number" name="verification-days" class="form-control" value="<?php echo ($verifyDays == NULL) ? "" : $verifyDays; ?>" min="0" required>
               </div>
@@ -328,11 +328,11 @@
                 <label for="notes">Notes</label>
                 <textarea type="message" name="notes" class="form-control" cols="25" rows="1" maxlength="500"><?php echo ($notes == NULL) ? "" : $notes; ?></textarea><br>
               </div>
-              <div class="form-check col-3" style="margin-left: 4px;">  
+              <div class="form-check col-1" style="margin-left: 4px;">
                 <input type="checkbox" id="surplus" class="form-check-input" name="surplus" value="yes">
                 <label for="surplus" class="form-check-label">Surplus</label>
               </div>
-            </div>  
+            </div>
             <input type="submit" class="form-control-inline" name="add-asset" value="Add" id="add-asset">
             <input type="submit" class="form-control-inline" name="add-duplicate-asset" value="Duplicate" id="add-duplicate-asset">
           </form>
@@ -340,7 +340,7 @@
         <div id="update-asset">
           <form action="process/asset-process.php" method="POST">
             <legend>Old Info</legend>
-            <div class="row">
+            <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
                 <label for="old-service-tag">Service Tag</label>
                 <input type="text" class="form-control" name="old-service-tag" id="old-service-tag">
@@ -377,9 +377,9 @@
                   <option disabled = "" selected = "">Select Model</option>
                 </select>
               </div>
-            </div> 
+            </div>
             <legend>New Info</legend>
-            <div class="row">
+            <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
                 <label for="new-service-tag">Service Tag</label>
                 <input type="text" class="form-control" name="new-service-tag" id="new-service-tag">
@@ -417,22 +417,22 @@
                 </select>
               </div>
             </div>
-            <div class="row">
-              <div class="form-group col-4">  
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="form-group col-3">
                 <label for="new-firstname">First Name</label>
                 <input type="text" class="form-control" name="new-firstname">
               </div>
-              <div class="form-group col-4">  
+              <div class="form-group col-3">
                 <label for="new-lastname">Last Name</label>
                 <input type="text" class="form-control" name="new-lastname">
               </div>
-              <div class="form-group col-4"> 
+              <div class="form-group col-3">
                 <label for="new-location">Location</label>
                 <input type="text" class="form-control" name="new-location">
               </div>
-            </div>  
-            <div class="row">
-              <div class="form-group col-6">
+            </div>
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="form-group col-3">
                 <label for="new-network">Network</label>
                 <input type="text" class="form-control" name="new-network">
               </div>
@@ -446,7 +446,7 @@
         </div>
         <div id="delete-asset">
           <form action="process/asset-process.php" method ="POST">
-            <div class="row">
+            <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
                 <label for="delete-service-tag">Service Tag</label>
                 <input type="text" class="form-control" name="delete-service-tag" id="delete-service-tag">
@@ -464,7 +464,7 @@
                   ?>
                 </select>
               </div>
-              <div class="form-group col-3">  
+              <div class="form-group col-3">
                 <label for="del-manufacturer">Manufacturer</label>
                 <select id="del-manufacturer" class="form-control" name="del-manufacturer">
                   <option disabled="" selected=""></option>
@@ -477,17 +477,17 @@
                   ?>
                 </select>
               </div>
-              <div class="form-group col-3">  
+              <div class="form-group col-3">
                 <label for="del-model">Model</label>
                 <select id = "del-model" class="form-control" name = "del-model">
                   <option disabled = "" selected = "">Select Model</option>
                 </select>
               </div>
-            </div>  
+            </div>
             <input type="submit" class="form-control-inline" name="delete-asset" value="Delete" id="delete-asset">
           </form>
         </div>
-      </div>  
+      </div>
       <div id="asset-msg">
         <?php
           if($_SESSION['msg'] == NULL){}
@@ -496,9 +496,11 @@
         ?>
       </div>
     </div>
+  </div>
+  <div class="container text-center">
     <div class="box">
       <legend><h3><span>Items</span></h3></legend>
-      <table id="all-items" class="table table-bordered dt-responsive nowrap" style="width:100%">
+      <table id="all-items" class="table table-striped table-bordered nowrap">
         <thead>
           <tr>
             <th>Service Tag</th>
