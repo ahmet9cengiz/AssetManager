@@ -1,6 +1,20 @@
 $(document).ready(function() {
   table = null;
-  table = $("#all-items").DataTable({});
+  table = $("#all-items").DataTable({
+    responsive: {
+      details: {
+          display: $.fn.dataTable.Responsive.display.modal({
+              header: function ( row ) {
+                  var data = row.data();
+                  return 'Details for '+data[1]+',<br>Service Tag: '+data[0];
+              }
+          }),
+          renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+              tableClass: 'table'
+          })
+        }
+      }
+  });
 
   $(function() {
     $("#purchase-date").datepicker();

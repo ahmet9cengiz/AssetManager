@@ -1,13 +1,27 @@
 $(document).ready(function() {
   table = null;
   table = $("#verify-table").DataTable({
+    responsive: {
+    details: {
+        display: $.fn.dataTable.Responsive.display.modal( {
+            header: function ( row ) {
+                var data = row.data();
+                return 'Details for '+data[0]+' '+data[1];
+            }
+        }),
+        renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+            tableClass: 'table'
+        })
+      }
+    },
     columnDefs: [
       {
         targets: -1,
         data: null,
         defaultContent: "<button>Verify</button>"
       }
-    ]
+    ],
+
   });
 
   $("#verify-table tbody").on("click", "button", function() {

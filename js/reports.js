@@ -1,10 +1,12 @@
 $(document).ready(function()
 {
     $("#menu").menu();
-    
+
     table = null;
     table = $('#report-table').DataTable({
-        dom: 'lfrtipB',
+        dom: 'Blfrtip',
+        lengthMenu: [[250, 500, -1], [250, 500, "All"]],
+        pageLength: 250,
         buttons:[
                 {
                     extend: 'csv',
@@ -13,7 +15,11 @@ $(document).ready(function()
                 {
                     extend:'pdf',
                     title: function(){return $("#report-name").val()},
-                }
+                },
+                {
+                    extend: 'print',
+                    title: function(){return $("#report-name").val()},
+                },
                 ]
     });
 });
