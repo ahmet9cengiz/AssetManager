@@ -42,6 +42,7 @@
 			$_SESSION['notes'] = $notes;
 			$_SESSION['location'] = $location;
 			$_SESSION['network'] = $network;
+			$_SESSION['surplus'] = $surplus;
 		}
 
 

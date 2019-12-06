@@ -185,7 +185,7 @@
     //preselect if duplicate
 
     var surplus = "<?php echo $surplus; ?>";
-    if(surplus == "yes"){
+    if(surplus == 1){
       $('#surplus').checked = true;
     }
 
