@@ -33,6 +33,8 @@
 
   <!--  Js Links-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <!-- jsPdf cdn link -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
 
@@ -99,53 +101,78 @@
     <div class="box">
       <div class="nav-tabs" id="tabs">
         <ul>
-          <li style="float: none; display: inline-block;"><a href="#generate-loan-pdf">Generate PDF</a></li>
-          <li style="float: none; display: inline-block;"><a href="#upload-loan-pdf">Upload PDF</a></li>
-          <li style="float: none; display: inline-block;"><a href="#check-loan-pdf">Check Loan PDF</a></li>
-          <li style="float: none; display: inline-block;"><a href="#delete-loan-pdf">Delete Loan PDF</a></li>
+          <li style="float: none; display: inline-block;"><a href="#generate-loan-form">Generate Loan Form</a></li>
+          <li style="float: none; display: inline-block;"><a href="#check-out-item">Check-out Item</a></li>
+          <li style="float: none; display: inline-block;"><a href="#check-in-item">Check-in Item</a></li>
         </ul>
-        <div id="generate-loan-pdf">
+        <div id="generate-loan-form">
           <div class="row justify-content-center align-items-center h-100">
-            <div class="form-group col-2">
-              <label for="firstname">First Name:</label>
-              <input type="text" name="firstname" id="firstname" class="form-control" required>
+            <div class="form-group col-4">
+              <label for="gen-firstname">First Name:</label>
+              <select id="gen-firstname" class="form-control" name="gen-firstname">
+                <option disabled = "" selected = "">Select First Name</option>
+                <?php
+                $firstnames = loadFirstNames();
+                foreach ($firstnames as $firstname)
+                {
+                  echo "<option id = '" . $firstname['UserID'] . "'value = '" . $firstname['UserID'] . "'>" . $firstname['FirstName'] . "</option>";
+                }
+                ?>
+              </select>
             </div>
-            <div class="form-group col-2">
-              <label for="lastname">Last Name:</label>
-              <input type="text" name="lastname" id="lastname" class="form-control" required>
+            <div class="form-group col-4">
+              <label for="gen-lastname">Last Name:</label>
+              <select id="gen-lastname" class="form-control" name="gen-lastname">
+                <option disabled = "" selected = "">Select Last Name</option>
+                <?php
+                $lastnames = loadLastNames();
+                foreach ($lastnames as $lastname)
+                {
+                  echo "<option id = '" . $lastname['UserID'] . "'value = '" . $lastname['UserID'] . "'>" . $lastname['LastName'] . "</option>";
+                }
+                ?>
+              </select>
             </div>
-            <div class="form-group col-2">
-              <label for="email">Email:</label>
-              <input type="email" name="email" id="email" class="form-control" required>
+            <div class="form-group col-4">
+              <label for="gen-email">Email:</label>
+              <select id="gen-email" class="form-control" name="gen-email">
+                <option disabled = "" selected = "">Select Email</option>
+              </select>
             </div>
-            <div class="form-group col-3">
-              <label for="purpose">Purpose:</label>
-              <select name="purpose" id="purpose" class="form-control">
-                <option selected>Faculty use for class.</option>
+          </div>
+          <div class="row justify-content-center align-items-center h-100">
+            <div class="form-group col-4">
+              <label for="gen-purpose">Purpose:</label>
+              <select name="gen-purpose" id="gen-purpose" class="form-control">
+                <option disabled = "" selected = "">Select Purpose</option>
+                <option>Faculty use for class.</option>
                 <option>Faculty use for meeting.</option>
                 <option>Staff use for work at home.</option>
                 <option>Staff use for meeting.</option>
               </select>
             </div>
-          </div>
-          <div class="row justify-content-center align-items-center h-100">
-            <div class="form-group col-2">
-              <label for="service-tag">Service Tag:</label>
-              <input type="text" name="service-tag" id="service-tag" class="form-control" required>
+            <div class="form-group col-4">
+              <label for="gen-service-tag">Service Tag:</label>
+              <select id="gen-service-tag" class="form-control" name="gen-service-tag">
+                <option disabled = "" selected = "">Select Service Tag</option>
+                <?php
+                $serviceTags = loadServiceTags();
+                foreach ($serviceTags as $serviceTag)
+                {
+                  echo "<option id = '" . $serviceTag['ItemID'] . "'value = '" . $serviceTag['ItemID'] . "'>" . $serviceTag['ServiceTag'] . "</option>";
+                }
+                ?>
+              </select>
             </div>
-            <div class="form-group col-2">
+            <div class="form-group col-4">
               <label for="loan-date">Loan Date:</label>
-              <input type="date" name="loan-date" id="loan-date" class="form-control" required>
-            </div>
-            <div class="form-group col-2">
-              <label for="return-date">Return Date:</label>
-              <input type="date" name="return-date" id="return-date" class="form-control">
+              <input type="date" name="loan-date" id="loan-date" class="form-control">
             </div>
           </div>
-          <button type="button" id="submit">Generate Loan PDF</button>
+          <button type="button" id="generate">Generate</button>
           <?php echo $message;  ?>
         </div>
-        <div id="upload-loan-pdf">
+        <div id="check-out-item">
           <form action="uploadPdf.php" method="POST" enctype="multipart/form-data">
             <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
@@ -162,8 +189,8 @@
           <div>
             <?php echo $message;  ?>
           </div>
-       </div>
-      <div id="check-loan-pdf">
+      </div>
+      <div id="check-in-item">
         <form action="downloadPdf.php" method="POST" >
           <div class="row justify-content-center align-items-center h-100">
             <div class="form-group col-2">
@@ -177,21 +204,7 @@
           <?php echo $message;  ?>
         </div>
       </div>
-      <div id="delete-loan-pdf">
-        <form action="deletePdf.php" method="POST">
-          <div class="row justify-content-center align-items-center h-100">
-            <div class="form-group col-2">
-              <label for="del-service-tag">Service Tag:</label>
-              <input type="text" name="del-service-tag" id="del-service-tag" class="form-control" required>
-            </div>
-            <input type="submit" name="submit" value="Delete PDF">
-          </div>
-        </form>
-        <div>
-          <?php echo $message;  ?>
-        </div>
-     </div>
-   </div>
+    </div>
   </div>
 </div>
 </body>
