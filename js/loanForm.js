@@ -57,7 +57,7 @@ $(document).ready(function() {
     if (serviceTag == "Select Service Tag") {
       serviceTag = "";
     }
-    var loanDate = $("#loan-date").val();
+    var loanDate = $("#gen-loan-date").val();
     var dateArray = loanDate.split("-");
     if (dateArray[0] == "") {
       loanDate = "";

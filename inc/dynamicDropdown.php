@@ -171,3 +171,24 @@
 
 		return $serviceTags;
 	}
+
+	function loadEmails()
+	{
+		$hostname = 'localhost';
+		$username = 'stbarnar';
+		$password = 'nono123';
+		$con;
+		try {
+		$con = new PDO("mysql:host=$hostname;dbname=stbarnar_db", $username, $password);
+		}
+		catch(PDOException $e)
+		{
+		echo $e->getMessage();
+		}
+
+		$stmt = $con->prepare("select * from proj_user");
+		$stmt->execute();
+		$emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		return $emails;
+	}

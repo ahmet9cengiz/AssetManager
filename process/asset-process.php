@@ -1,6 +1,6 @@
 <?php
 	session_start();
-  require_once "../inc/dbconnect.php";
+    require_once "../inc/dbconnect.php";
 	$msg = '';
 	$stmt = null;
 

@@ -165,47 +165,95 @@
               </select>
             </div>
             <div class="form-group col-4">
-              <label for="loan-date">Loan Date:</label>
-              <input type="date" name="loan-date" id="loan-date" class="form-control">
+              <label for="gen-loan-date">Loan Date:</label>
+              <input type="date" name="gen-loan-date" id="gen-loan-date" class="form-control">
             </div>
           </div>
           <button type="button" id="generate">Generate</button>
-          <?php echo $message;  ?>
         </div>
         <div id="check-out-item">
-          <form action="uploadPdf.php" method="POST" enctype="multipart/form-data">
+          <form action="process/form-process.php" method="POST" enctype="multipart/form-data">
             <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
-                <label for="up-service-tag">Service Tag:</label>
-                <input type="text" name="up-service-tag" id="up-service-tag" class="form-control" required>
+                <label for="out-email">Email:</label>
+                <select id="out-email" class="form-control" name="out-email" required>
+                  <?php
+                  $emails = loadEmails();
+                  foreach ($emails as $email)
+                  {
+                    echo "<option id = '" . $email['UserID'] . "'value = '" . $email['UserID'] . "'>" . $email['email'] . "</option>";
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="form-group col-2">
+                <label for="out-service-tag">Service Tag:</label>
+                <select id="out-service-tag" class="form-control" name="out-service-tag" required>
+                  <?php
+                  $serviceTags = loadServiceTags();
+                  foreach ($serviceTags as $serviceTag)
+                  {
+                    echo "<option id = '" . $serviceTag['ItemID'] . "'value = '" . $serviceTag['ItemID'] . "'>" . $serviceTag['ServiceTag'] . "</option>";
+                  }
+                  ?>
+                </select>
               </div>
               <div class="form-group col-3">
-                <label for="uploaded-pdf"></label>
-                <input type="file" name="uploaded-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control">
+                <label for="out-loan-date">Loan Date:</label>
+                <input type="date" name="out-loan-date" id="out-loan-date" class="form-control" required>  
+              </div>   
+              <div class="form-group col-4">
+                <label for="out-upload-pdf">Upload Loan From:</label>
+                <input type="file" name="out-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control" required>
               </div>
             </div>
-            <input type="submit" name="submit" value="Upload PDF">
+            <input type="submit" name="out-submit" id="out-submit" value="Check-out">
           </form>
-          <div>
-            <?php echo $message;  ?>
-          </div>
-      </div>
-      <div id="check-in-item">
-        <form action="downloadPdf.php" method="POST" >
-          <div class="row justify-content-center align-items-center h-100">
-            <div class="form-group col-2">
-              <label for="down-service-tag">Service Tag:</label>
-              <input type="text" name="down-service-tag" id="down-service-tag" class="form-control" required>
-            </div>
-            <input type="submit" name="submit" value="Download PDF">
-          </div>
-        </form>
-        <div>
-          <?php echo $message;  ?>
         </div>
+        <div id="check-in-item">
+          <form action="process/form-process.php" method="POST" >
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="form-group col-3">
+                <label for="in-email">Email:</label>
+                <select id="in-email" class="form-control" name="in-email" required>
+                  <?php
+                  $emails = loadEmails();
+                  foreach ($emails as $email)
+                  {
+                    echo "<option id = '" . $email['UserID'] . "'value = '" . $email['UserID'] . "'>" . $email['email'] . "</option>";
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="form-group col-2">
+                <label for="in-service-tag">Service Tag:</label>
+                <select id="in-service-tag" class="form-control" name="in-service-tag" required>
+                  <?php
+                  $serviceTags = loadServiceTags();
+                  foreach ($serviceTags as $serviceTag)
+                  {
+                    echo "<option id = '" . $serviceTag['ItemID'] . "'value = '" . $serviceTag['ItemID'] . "'>" . $serviceTag['ServiceTag'] . "</option>";
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="form-group col-3">
+                <label for="in-return-date">Return Date:</label>
+                <input type="date" name="in-return-date" id="in-return-date" class="form-control" required>  
+              </div>   
+              <div class="form-group col-4">
+                <label for="in-upload-pdf">Upload Loan From:</label>
+                <input type="file" name="in-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control" required>
+              </div>
+            </div>
+            <input type="submit" name="in-submit" id="in-submit" value="Check-in">
+          </form>
+        </div>
+      </div>
+      <div id="message">
+        <?php print $message; ?>
       </div>
     </div>
   </div>
-</div>
 </body>
 </html>
