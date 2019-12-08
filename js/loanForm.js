@@ -32,6 +32,26 @@ $(document).ready(function() {
     }
   });
 
+  $("#in-service-tag").change(function() {
+    var itemID = $("#in-service-tag").val();
+    $.ajax({
+      url: "inc/dynamicDropdown.php",
+      method: "POST",
+      data: { item_id: itemID }
+    }).done(function(emails) {
+      emails = JSON.parse(emails);
+      $("#in-email").empty();
+      emails.forEach(function(email) {
+        $("#in-email").append(
+          '<option value = "' + email.userID + '" >' + email.email + "</option>"
+        );
+        console.log(email.UserID);
+      });
+    });
+  });
+
+  $("#in-service-tag").trigger("change");
+
   $("#menu").menu();
   $("#generate").click(generatePdf);
 

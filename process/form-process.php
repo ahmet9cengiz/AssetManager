@@ -41,8 +41,8 @@
                     if($fileSize < 50000){ //50mb
                         $fileUniqName = uniqid('', true);
                         $fileUniqName = $fileUniqName . "." . $fileActualExt;
-                        //$fileDestination = '/home/stbarnar/htdocs/asset_mgt/pdfs/' . $fileUniqName;
-                        $fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
+                        $fileDestination = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $fileUniqName;
+                        //$fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
                         move_uploaded_file($fileTmpName, $fileDestination);
                         $message = "File is successfully uploaded!";
                     }
@@ -95,6 +95,97 @@
 
             header("location:../forms.php");
         }
+    }
+
+    if(isset($_POST['in-submit'])){
+        
+        $itemID = $_POST['in-service-tag'];
+        $returnDate = $_POST['in-return-date'];
+
+        $stmt = $con->prepare("call Get_Pdf(?)"); 
+        $stmt->execute(array($itemID));
+        $row = $stmt->fetch(PDO::FETCH_OBJ);
+        $filename = $row->PDF;
+        $userID = $row->UserID;
+
+        $pathToPdfs = "../loanForms/";
+        $filename = $pathToPdfs.$filename;
+        
+        $file = $_FILES['in-upload-pdf'];
+        $fileName = $file['name'];
+        $fileTmpName = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $fileError = $file['error'];
+        $fileType = $file['type'];
+        $fileUniqName = "";
+
+        $fileExt = explode('.', $fileName);
+        $fileActualExt = strtolower(end($fileExt));
+
+        $allowedExt = array('pdf');
+
+        if(in_array($fileActualExt, $allowedExt)){
+            if($fileError === 0){
+                if($fileSize < 50000){ //50mb
+                    $fileUniqName = uniqid('', true);
+                    $fileUniqName = $fileUniqName . "." . $fileActualExt;
+                    $fileDestination = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $fileUniqName;
+                    //$fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
+                    move_uploaded_file($fileTmpName, $fileDestination);
+                    $message = "File is successfully uploaded!";
+
+                    if(!unlink($filename)){
+                        $message = "There was an error updating the form";
+                        $_SESSION['message'] = $message;
+                        header("location:../forms.php");
+                    } 
+                }
+                else{
+                    $message = "File size exceeds limit!";
+                    $_SESSION['message'] = $message;
+                    header("location:../forms.php");
+                }
+            }
+            else{
+                $message = "There was an error uploading the file";
+                $_SESSION['message'] = $message;
+                header("location:../forms.php");
+            }
+        }
+        else{
+            $message = "You cannot upload files other than pdf!";
+            $_SESSION['message'] = $message;
+            header("location:../forms.php");
+        }
+
+        if($message == "File is successfully uploaded!"){ //upload successfull
+
+            $stmt = null;
+            $stmt = $con->prepare("call Update_Checkout(?, ?, ?, ?);"); 
+            $stmt->execute(array($itemID, $userID, $returnDate, $fileUniqName));
+
+            if ($stmt->rowCount()){
+                $stmt = null;
+                $stmt = $con->prepare("call Item_NoUser(?);"); 
+                $stmt->execute(array($itemID));
+
+                if($stmt->rowCount()){
+                    //do nothing
+                }
+                else{
+                    $message = "Item user couldn't be changed";
+                    $_SESSION['message'] = $message;
+                    header("location:../forms.php");
+                }
+            } else{
+                $message = "There was an error checking-out the item";
+                $_SESSION['message'] = $message;
+                header("location:../forms.php");
+            }
+            $_SESSION['message'] = $message;
+
+            header("location:../forms.php");
+        }    
     }
 
 ?>

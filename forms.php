@@ -211,25 +211,13 @@
           </form>
         </div>
         <div id="check-in-item">
-          <form action="process/form-process.php" method="POST" >
+          <form action="process/form-process.php" method="POST" enctype="multipart/form-data">
             <div class="row justify-content-center align-items-center h-100">
-              <div class="form-group col-3">
-                <label for="in-email">Email:</label>
-                <select id="in-email" class="form-control" name="in-email" required>
-                  <?php
-                  $emails = loadEmails();
-                  foreach ($emails as $email)
-                  {
-                    echo "<option id = '" . $email['UserID'] . "'value = '" . $email['UserID'] . "'>" . $email['email'] . "</option>";
-                  }
-                  ?>
-                </select>
-              </div>
               <div class="form-group col-2">
                 <label for="in-service-tag">Service Tag:</label>
                 <select id="in-service-tag" class="form-control" name="in-service-tag" required>
                   <?php
-                  $serviceTags = loadServiceTags();
+                  $serviceTags = loadCheckedOutServiceTags();
                   foreach ($serviceTags as $serviceTag)
                   {
                     echo "<option id = '" . $serviceTag['ItemID'] . "'value = '" . $serviceTag['ItemID'] . "'>" . $serviceTag['ServiceTag'] . "</option>";
@@ -238,12 +226,17 @@
                 </select>
               </div>
               <div class="form-group col-3">
+                <label for="in-email">Email:</label>
+                <select id="in-email" class="form-control" name="in-email" required>
+                </select>
+              </div>
+              <div class="form-group col-3">
                 <label for="in-return-date">Return Date:</label>
                 <input type="date" name="in-return-date" id="in-return-date" class="form-control" required>  
               </div>   
               <div class="form-group col-4">
-                <label for="in-upload-pdf">Upload Loan From:</label>
-                <input type="file" name="in-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control" required>
+                <label for="in-upload-pdf">Upload Loan Form:</label>
+                <input type="file" id="in-upload-pdf" name="in-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control" required>
               </div>
             </div>
             <input type="submit" name="in-submit" id="in-submit" value="Check-in">
