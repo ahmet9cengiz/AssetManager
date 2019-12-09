@@ -4,7 +4,7 @@
     require "inc/sessionVerify.php";
     require 'inc/dynamicDropdown.php';
 	  require "inc/util.php";
-    // require "tables/asset-manager-table.php";
+    require "tables/forms-table.php";
 
     $message = "";
     if(isset($_SESSION['message'])){
@@ -33,8 +33,8 @@
 
   <!--  Js Links-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <!-- jsPdf cdn link -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+  <!-- jsPdf cdn link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js"></script>
 
@@ -99,7 +99,7 @@
   </nav>
   <div class="container text-center">
     <div class="box">
-      <div class="nav-tabs" id="tabs">
+      <div class="nav-tabs" id="loan-tabs">
         <ul>
           <li style="float: none; display: inline-block;"><a href="#generate-loan-form">Generate Loan Form</a></li>
           <li style="float: none; display: inline-block;"><a href="#check-out-item">Check-out Item</a></li>
@@ -245,6 +245,65 @@
       </div>
       <div id="message">
         <?php print $message; ?>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center">
+    <div class="box">
+      <div class="nav-tabs" id="table-tabs">
+        <ul>
+          <li style="float: none; display: inline-block;"><a href="#current-loans">Current Loans</a></li>
+          <li style="float: none; display: inline-block;"><a href="#loan-history">Loan History</a></li>
+        </ul>
+        <div id="current-loans">
+          <table id="current-table" class="table table-striped table-bordered nowrap">
+            <thead>
+              <tr>
+              <th>Service Tag</th>
+              <th>User Email</th>
+              <th>Loan Date</th>
+              <th>Loan Form</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                for($i = 0; $i < sizeof($CurST); $i++)
+                {
+                  print '<tr>';
+                  print '<td>'.$CurST[$i].'</td><td>'.
+                  $CurEmail[$i].'</td><td>'.$CurLoanDate[$i].
+                  '</td><td><a href="process/form-process.php?file='.$CurLoanForm[$i].'" class="btn">Download</a></td>';
+                  print '</tr>';
+                }
+              ?>
+            </tbody>
+          </table> 
+        </div> 
+        <div id="loan-history">
+          <table id="history-table" class="table table-striped table-bordered nowrap">
+            <thead>
+              <tr>
+              <th>Service Tag</th>
+              <th>User Email</th>
+              <th>Loan Date</th>
+              <th>Return Date</th>
+              <th>Loan Form</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                for($i = 0; $i < sizeof($HistST); $i++)
+                {
+                  print '<tr>';
+                  print '<td>'.$HistST[$i].'</td><td>'.
+                  $HistEmail[$i].'</td><td>'.$HistLoanDate[$i].'</td><td>'.
+                  $HistReturnDate[$i].'</td><td><a href="process/form-process.php?file='.$HistLoanForm[$i].'" class="btn">Download</a></td>';
+                  print '</tr>';
+                }
+              ?>
+            </tbody>
+          </table> 
+        </div>    
       </div>
     </div>
   </div>

@@ -1,6 +1,42 @@
 $(document).ready(function() {
-  $("#tabs").tabs({
+  $("#loan-tabs").tabs({
     collapsible: true
+  });
+
+  $("#table-tabs").tabs({
+    collapsible: true
+  });
+
+  var currentTable = $("#current-table").DataTable({
+    responsive: {
+      details: {
+        display: $.fn.dataTable.Responsive.display.modal({
+          header: function(row) {
+            var data = row.data();
+            return "Details for " + data[0];
+          }
+        }),
+        renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+          tableClass: "table"
+        })
+      }
+    }
+  });
+
+  var historyTable = $("#history-table").DataTable({
+    responsive: {
+      details: {
+        display: $.fn.dataTable.Responsive.display.modal({
+          header: function(row) {
+            var data = row.data();
+            return "Details for " + data[0];
+          }
+        }),
+        renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+          tableClass: "table"
+        })
+      }
+    }
   });
 
   $("#gen-firstname, #gen-lastname").change(function() {
@@ -45,7 +81,6 @@ $(document).ready(function() {
         $("#in-email").append(
           '<option value = "' + email.userID + '" >' + email.email + "</option>"
         );
-        console.log(email.UserID);
       });
     });
   });
