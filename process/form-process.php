@@ -6,8 +6,8 @@
 
     if(isset($_GET['file'])){
         $filename = $_GET['file'];
-        //$filePath = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $filename;
-        $filePath = '/home/ahcengiz/htdocs/base_files/loanForms/' . $filename;
+        $filePath = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $filename;
+        //$filePath = '/home/ahcengiz/htdocs/base_files/loanForms/' . $filename;
 
         if(!empty($filename) && file_exists($filePath)){
 
