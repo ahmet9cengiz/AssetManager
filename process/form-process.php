@@ -6,8 +6,8 @@
 
     if(isset($_GET['file'])){
         $filename = $_GET['file'];
-        $filePath = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $filename;
-        //$filePath = '/home/ahcengiz/htdocs/base_files/loanForms/' . $filename;
+        //$filePath = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $filename;
+        $filePath = '/home/ahcengiz/htdocs/base_files/loanForms/' . $filename;
 
         if(!empty($filename) && file_exists($filePath)){
 
@@ -37,7 +37,7 @@
         $row = $stmt->fetch(PDO::FETCH_OBJ);
         $uid = $row->UserID;
         
-        if($uid != 97){
+        if($uid != 1){
             $message = "Item is not available!";
             $_SESSION['message'] = $message;
             header("location:../forms.php");
@@ -62,8 +62,8 @@
                     if($fileSize < 50000){ //50mb
                         $fileUniqName = uniqid('', true);
                         $fileUniqName = $fileUniqName . "." . $fileActualExt;
-                        $fileDestination = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $fileUniqName;
-                        //$fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
+                        //$fileDestination = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $fileUniqName;
+                        $fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
                         move_uploaded_file($fileTmpName, $fileDestination);
                         $message = "File is successfully uploaded!";
                     }
@@ -150,8 +150,8 @@
                 if($fileSize < 50000){ //50mb
                     $fileUniqName = uniqid('', true);
                     $fileUniqName = $fileUniqName . "." . $fileActualExt;
-                    $fileDestination = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $fileUniqName;
-                    //$fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
+                    //$fileDestination = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $fileUniqName;
+                    $fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $message = "File is successfully uploaded!";
 
