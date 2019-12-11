@@ -185,7 +185,7 @@
     //preselect if duplicate
 
     var surplus = "<?php echo $surplus; ?>";
-    if(surplus == "1"){
+    if(surplus == "yes"){
       $('#surplus').checked = true;
     }
 
@@ -324,11 +324,11 @@
                 <label for='verification-days'>Verification Days</label>
                 <input type="number" name="verification-days" class="form-control" value="<?php echo ($verifyDays == NULL) ? "" : $verifyDays; ?>" min="0" required>
               </div>
-              <div class="form-group col-6">
+              <div class="form-group col-4">
                 <label for="notes">Notes</label>
-                <textarea type="message" name="notes" class="form-control" cols="25" rows="1" maxlength="500"><?php echo ($notes == NULL) ? "" : $notes; ?></textarea>
+                <textarea type="message" name="notes" class="form-control" cols="25" rows="1" maxlength="500"><?php echo ($notes == NULL) ? "" : $notes; ?></textarea><br>
               </div>
-              <div class="form-check col-3">
+              <div class="form-check col-1" style="margin-left: 4px;">
                 <input type="checkbox" id="surplus" class="form-check-input" name="surplus" value="yes">
                 <label for="surplus" class="form-check-label">Surplus</label>
               </div>
