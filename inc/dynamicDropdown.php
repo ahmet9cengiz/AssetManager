@@ -222,3 +222,22 @@
 
 		return $serviceTags;
 	}
+
+	function loadUsers(){
+		$hostname = 'localhost';
+		$username = 'stbarnar';
+		$password = 'nono123';
+		$con;
+		try {
+		$con = new PDO("mysql:host=$hostname;dbname=stbarnar_db", $username, $password);
+		}
+		catch(PDOException $e)
+		{
+		echo $e->getMessage();
+		}
+		$stmt = $con->prepare("SELECT * FROM UserView");
+		$stmt->execute();
+		$serviceTags = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		return $users;
+	}
