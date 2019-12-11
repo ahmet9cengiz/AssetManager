@@ -289,11 +289,11 @@
                 <select id="add-location" class="form-control" name="add-location">
                   <option disabled="" selected="">Select location</option>
                   <?php
-                  $locations = loadLocations();
-                  foreach ($locations as $location)
-                  {
-                    echo "<option id = '" . $location['LocationID'] . "'value = '" . $location['LocationName'] . "'>" . $location['LocationName'] . "</option>";
-                  }
+                    $locations = loadLocations();
+                    foreach ($locations as $location)
+                    {
+                      echo "<option id = '" . $location['LocationID'] . "'value = '" . $location['LocationName'] . "'>" . $location['LocationName'] . "</option>";
+                    }
                   ?>
                 </select>
               </div>
@@ -419,13 +419,24 @@
             </div>
             <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
-                <label for="new-firstname">First Name</label>
-                <input type="text" class="form-control" name="new-firstname">
+                <label for="user">User</label>
+                <select id="new-user" class="form-control" name="new-user">
+                  <option disabled="" selected=""></option>
+                  <?php
+                    $names = loadUsers();
+                    foreach($names as $name)
+                    {
+                      echo "<option id= '" . $name['UID'] . "'value= '" . $name['UID'] . "'>" . $name['Name'] . "</option>";
+                    }
+                  ?>
+                </select>
+                <!-- <label for="new-firstname">First Name</label>
+                <input type="text" class="form-control" name="new-firstname"> -->
               </div>
-              <div class="form-group col-3">
+              <!-- <div class="form-group col-3">
                 <label for="new-lastname">Last Name</label>
                 <input type="text" class="form-control" name="new-lastname">
-              </div>
+              </div> -->
               <div class="form-group col-3">
                 <label for="new-location">Location</label>
                 <input type="text" class="form-control" name="new-location">
