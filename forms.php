@@ -103,8 +103,8 @@
       <div class="nav-tabs" id="loan-tabs">
         <ul>
           <li style="float: none; display: inline-block;"><a href="#generate-loan-form">Generate Loan Form</a></li>
-          <li style="float: none; display: inline-block;"><a href="#check-out-item">Check-out Item</a></li>
-          <li style="float: none; display: inline-block;"><a href="#check-in-item">Check-in Item</a></li>
+          <li style="float: none; display: inline-block;"><a href="#check-out-item">Loan</a></li>
+          <li style="float: none; display: inline-block;"><a href="#check-in-item">Return</a></li>
         </ul>
         <div id="generate-loan-form">
           <div class="row justify-content-center align-items-center h-100">
@@ -205,7 +205,7 @@
               </div>   
               <div class="form-group col-4">
                 <label for="out-upload-pdf">Upload Loan From:</label>
-                <input type="file" name="out-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control" required>
+                <input type="file" name="out-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control">
               </div>
             </div>
             <input type="submit" name="out-submit" id="out-submit" value="Check-out">
@@ -237,7 +237,7 @@
               </div>   
               <div class="form-group col-4">
                 <label for="in-upload-pdf">Upload Loan Form:</label>
-                <input type="file" id="in-upload-pdf" name="in-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control" required>
+                <input type="file" id="in-upload-pdf" name="in-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control">
               </div>
             </div>
             <input type="submit" name="in-submit" id="in-submit" value="Check-in">
