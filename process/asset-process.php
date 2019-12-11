@@ -1,6 +1,6 @@
 <?php
 	session_start();
-    require_once "../inc/dbconnect.php";
+  require_once "../inc/dbconnect.php";
 	$msg = '';
 	$stmt = null;
 
@@ -15,8 +15,8 @@
 		$lverify = date('Y-m-d', strtotime($_POST['purchase-date']));
 		$fverify = date('Y-m-d', strtotime($_POST['purchase-date'].' + '.$verification_days.' day'));
 		$notes = $_POST['notes'];
-		$firstname = '';
-		$lastname = '';
+		$firstname = 'None';
+		$lastname = 'None';
 		$location = $_POST['add-location'];
 		$network = $_POST['add-network'];
 		$category = $_POST['add-category'];
@@ -27,8 +27,8 @@
 		}else{
 			$surplus = 0;
 		}
-		
-		
+
+
 
 		if(isset($_POST['add-duplicate-asset'])){
 			$_SESSION['duplicate'] = "duplicate";
@@ -42,36 +42,38 @@
 			$_SESSION['notes'] = $notes;
 			$_SESSION['location'] = $location;
 			$_SESSION['network'] = $network;
-			$_SESSION['surplus'] = $surplus;
 		}
 
-
+		//
 		// echo 'Service Tag: '.$service_tag.
 		// '<br>Model Number: '.$model_number.
 		// '<br>Purchase Date: '.$purchase.
 		// '<br>Warranty: '.$warranty.
 		// '<br>Warranty End: '.$warranty_end.
+		// '<br>Surplus: '.$surplus.
 		// '<br>Verification Days: '.$verification_days.
 		// '<br>Last Verify: '.$lverify.
 		// '<br>Future Verify: '.$fverify.
-		// '<br>';
+		// '<br>Notes: '.$notes.
+		// '<br>First Name: '.$firstname.
+		// '<br>Last Name: '.$lastname.
+		// '<br>Location: '.$location.
+		// '<br>Network: '.$network;
 
 		$stmt = $con->prepare("call FindServiceTag(?);"); //does the service tag exist
 		$stmt->execute(array($service_tag));
 		$row = $stmt->fetch(PDO::FETCH_OBJ);
 		$count = $row->C;
-		if($count == 0){
+		if($count == 0)
+		{
+			$stmt = $con->prepare("call Add_Item(?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 
-			$stmt = NULL;
-			$stmt = $con->prepare("call Add_Item(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-	
 			$variableArray = array($service_tag, $model_number, $purchase,
 								 $warranty, $warranty_end, $surplus, $verification_days,
 								 $lverify, $fverify, $notes, $firstname,
 								 $lastname, $location, $network);
-	
+
 			$stmt->execute($variableArray);
-			$stmt = null;
 			$msg = 'Item successfully added';
 		}
 		else{
@@ -82,7 +84,7 @@
 	}
 	$stmt=null;
 
-	
+
 
 	if(isset($_POST['update-asset']))
 	{
