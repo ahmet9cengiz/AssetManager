@@ -7,8 +7,7 @@
     if(isset($_GET['file'])){
         $filename = $_GET['file'];
         if($filename != "no pdf"){
-            //$filePath = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $filename;
-            $filePath = '/home/ahcengiz/htdocs/base_files/loanForms/' . $filename;
+            $fileDestination = '../loanForms/' . $fileUniqName;
 
             if(!empty($filename) && file_exists($filePath)){
 
@@ -69,8 +68,7 @@
                         if($fileSize < 50000){ //50mb
                             $fileUniqName = uniqid('', true);
                             $fileUniqName = $fileUniqName . "." . $fileActualExt;
-                            //$fileDestination = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $fileUniqName;
-                            $fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
+                            $fileDestination = '../loanForms/' . $fileUniqName;
                             move_uploaded_file($fileTmpName, $fileDestination);
                             $message = "File is successfully uploaded!";
                         }
@@ -161,8 +159,7 @@
                     if($fileSize < 50000){ //50mb
                         $fileUniqName = uniqid('', true);
                         $fileUniqName = $fileUniqName . "." . $fileActualExt;
-                        //$fileDestination = '/home/stbarnar/htdocs/asset_mgt/loanForms/' . $fileUniqName;
-                        $fileDestination = '/home/ahcengiz/htdocs/base_files/loanForms/' . $fileUniqName;
+                        $fileDestination = '../loanForms/' . $fileUniqName;
                         move_uploaded_file($fileTmpName, $fileDestination);
                         $message = "File is successfully uploaded!";
 
