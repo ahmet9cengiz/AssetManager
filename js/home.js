@@ -1,5 +1,6 @@
 $(document).ready(function() {
   table = null;
+
   table = $("#verify-table").DataTable({
     responsive: {
     details: {
@@ -16,7 +17,7 @@ $(document).ready(function() {
     },
     columnDefs: [
       {
-        targets: -1,
+        targets: 0,
         data: null,
         defaultContent: "<button>Verify</button>"
       }
@@ -25,12 +26,17 @@ $(document).ready(function() {
   });
 
   $("#verify-table tbody").on("click", "button", function() {
-    var rowData = table.row($(this).parents("tr")).data();
-    var tag = rowData[0];
+    var date = new Date();
+	var curDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    var dataRow = table.row( $(this).parents('tr') );
+	var rowData = dataRow.data();
+	var tag = rowData[0];
+	dataRow.remove();
+	table.draw();
     $.ajax({
       type: "POST",
       url: "home-process.php",
-      data: { tag: tag }
+      data: { tag: tag, curDate: curDate}
     });
   });
 
