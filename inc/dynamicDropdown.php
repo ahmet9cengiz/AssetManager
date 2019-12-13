@@ -34,6 +34,17 @@
 		echo json_encode($emails);
 	}
 
+	//dynamic populate for canned-reports
+	if(isset($_POST['crManu']))
+	{
+		$canned_report_manufacturers = $_POST['crManu'];
+		$stmt = $con->prepare("call Canned_Report(?);");
+		$stmt->execute(array($canned_report_manufacturers));
+		$reports = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		echo json_encode($reports);
+	}
+
+
 	function loadCategories()
 	{
 
@@ -223,6 +234,26 @@
 		return $serviceTags;
 	}
 
+	function loadAllServiceTags()
+	{
+		$hostname = 'localhost';
+		$username = 'stbarnar';
+		$password = 'nono123';
+		$con;
+		try {
+		$con = new PDO("mysql:host=$hostname;dbname=stbarnar_db", $username, $password);
+		}
+		catch(PDOException $e)
+		{
+		echo $e->getMessage();
+		}
+
+		$stmt = $con->prepare("SELECT ServiceTag from proj_item");
+		$stmt->execute();
+		$allST = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		return $allST;
+	}
 	function loadUsers(){
 		$hostname = 'localhost';
 		$username = 'stbarnar';
