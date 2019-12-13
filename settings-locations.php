@@ -155,7 +155,7 @@
 	<div class="box">
 		<fieldset>
 		  <legend><h3><span>Locations</span></h3></legend>
-		  <table id="current-locations" class="display" style="width:35%">
+		  <table id="current-locations" class="table table-striped table-bordered nowrap">
 		    <thead>
 		      <tr>
 		        <th>Location Name</th>

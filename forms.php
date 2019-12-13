@@ -5,13 +5,11 @@
     require 'inc/dynamicDropdown.php';
 	  require "inc/util.php";
     require "tables/forms-table.php";
-
     $message = "";
     if(isset($_SESSION['message'])){
       $message = $_SESSION['message'];
       unset($_SESSION['message']);
     }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,11 +49,11 @@
   <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
 
-  
+
 
 	<!-- Main JS -->
   <script src="js/loanForm.js"></script>
-  
+
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -201,8 +199,8 @@
               </div>
               <div class="form-group col-3">
                 <label for="out-loan-date">Loan Date:</label>
-                <input type="date" name="out-loan-date" id="out-loan-date" class="form-control" required>  
-              </div>   
+                <input type="date" name="out-loan-date" id="out-loan-date" class="form-control" required>
+              </div>
               <div class="form-group col-4">
                 <label for="out-upload-pdf">Upload Loan From:</label>
                 <input type="file" name="out-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control">
@@ -233,8 +231,8 @@
               </div>
               <div class="form-group col-3">
                 <label for="in-return-date">Return Date:</label>
-                <input type="date" name="in-return-date" id="in-return-date" class="form-control" required>  
-              </div>   
+                <input type="date" name="in-return-date" id="in-return-date" class="form-control" required>
+              </div>
               <div class="form-group col-4">
                 <label for="in-upload-pdf">Upload Loan Form:</label>
                 <input type="file" id="in-upload-pdf" name="in-upload-pdf" style="border: 1px black; background-color: white; width: 250px;" class="form-control">
@@ -278,8 +276,8 @@
                 }
               ?>
             </tbody>
-          </table> 
-        </div> 
+          </table>
+        </div>
         <div id="loan-history">
           <table id="history-table" class="table table-striped table-bordered nowrap" style="width: 100%">
             <thead>
@@ -303,8 +301,8 @@
                 }
               ?>
             </tbody>
-          </table> 
-        </div>    
+          </table>
+        </div>
       </div>
     </div>
   </div>

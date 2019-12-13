@@ -242,6 +242,7 @@
           <li style="float: none; display: inline-block;"><a href="#add-asset">Add Item</a></li>
           <li style="float: none; display: inline-block;"><a href="#update-asset">Update Item</a></li>
           <li style="float: none; display: inline-block;"><a href="#delete-asset">Delete Item</a></li>
+          <li style="float: none; display: inline-block;"><a href="#edit-verify">Edit Verify</a></li>
         </ul>
         <div id="add-asset">
           <form action="process/asset-process.php" method ="POST">
@@ -328,10 +329,10 @@
                 <label for="notes">Notes</label>
                 <textarea type="message" name="notes" class="form-control" cols="25" rows="1" maxlength="500"><?php echo ($notes == NULL) ? "" : $notes; ?></textarea><br>
               </div>
-              <div class="form-check col-1" style="margin-left: 4px;">
+<!--              <div class="form-check col-1" style="margin-left: 4px;">
                 <input type="checkbox" id="surplus" class="form-check-input" name="surplus" value="yes">
                 <label for="surplus" class="form-check-label">Surplus</label>
-              </div>
+              </div>-->
             </div>
             <input type="submit" class="form-control-inline" name="add-asset" value="Add" id="add-asset">
             <input type="submit" class="form-control-inline" name="add-duplicate-asset" value="Duplicate" id="add-duplicate-asset">
@@ -419,25 +420,6 @@
             </div>
             <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
-                <label for="user">User</label>
-                <select id="new-user" class="form-control" name="new-user">
-                  <option disabled="" selected=""></option>
-                  <?php
-                    $names = loadUsers();
-                    foreach($names as $name)
-                    {
-                      echo "<option id= '" . $name['UID'] . "'value= '" . $name['UID'] . "'>" . $name['Name'] . "</option>";
-                    }
-                  ?>
-                </select>
-                <!-- <label for="new-firstname">First Name</label>
-                <input type="text" class="form-control" name="new-firstname"> -->
-              </div>
-              <!-- <div class="form-group col-3">
-                <label for="new-lastname">Last Name</label>
-                <input type="text" class="form-control" name="new-lastname">
-              </div> -->
-              <div class="form-group col-3">
                 <label for="new-location">Location</label>
                 <input type="text" class="form-control" name="new-location">
               </div>
@@ -496,6 +478,29 @@
               </div>
             </div>
             <input type="submit" class="form-control-inline" name="delete-asset" value="Delete" id="delete-asset">
+          </form>
+        </div>
+        <div id="edit-verify">
+          <form action="process/asset-process.php" method ="POST">
+            <div class="row justify-content-center align-items-center h-100">
+              <div class="form-group col-3">
+                <label for="edit-st">Service Tag</label>
+                <select name="edit-st" id="edit-st" class="form-control">
+                  <?php
+                  $allSTs = loadAllServiceTags();
+                  foreach ($allSTs as $st)
+                  {
+                    echo "<option id = '" . $st['ServiceTag'] . "'value = '" . $st['ServiceTag'] . "'>" . $st['ServiceTag'] . "</option>";
+                  }
+                  ?>
+                </select>
+              </div>
+              <div class="form-group col-3">
+                <label for="edit-vday">Verification Days</label>
+                <input type="number" id="edit-vday" name="edit-vday" min="0" class="form-control">
+              </div>
+              <input type="submit" id="edit-verify" name="edit-verify" value="Edit">
+            </div>
           </form>
         </div>
       </div>

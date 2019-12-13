@@ -267,7 +267,7 @@
 	<div class="box">
     <fieldset>
       <legend><h3><span>Models</span></h3></legend>
-      <table id="current-models" class="display">
+      <table id="current-models" class="table table-striped table-bordered nowrap">
         <thead>
           <tr>
             <th>Model Number</th>

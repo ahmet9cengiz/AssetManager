@@ -153,7 +153,7 @@
 <br><br>
 <div class="box" style="width: auto">
 	<legend><h3><span>Categories</span></h3></legend>
-	<table id="current-categories" class="display">
+	<table id="current-categories" class="table table-striped table-bordered nowrap">
 	  <thead>
 		<tr>
 		  <th>Name</th>

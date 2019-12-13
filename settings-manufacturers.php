@@ -150,8 +150,8 @@
 					<form action="process/manufacturer-process.php" method="POST">
 						<div class="row justify-content-center align-items-center h-100">
 							<div class="form-group col-3">
-								<label for="manuname">Manufacturer Name: </label>
-								<input type="text" name="del-manu" class="form-control" required>
+								<label for="del-manu">Manufacturer Name: </label>
+								<input type="text" name="del-manu" id="del-manu" class="form-control" required>
 						  </div>
 						</div>
 						<input name="delete-manufacturer" type="submit" value="Delete" id="delete-manufacturer">
@@ -170,7 +170,7 @@
 	<div class="box">
 		<fieldset>
 		<legend><h3><span>Manufacturers</span></h3></legend>
-		<table id="current-manufacturers" class="display" style="width: auto">
+		<table id="current-manufacturers" class="table table-striped table-bordered nowrap">
 		<thead>
 		<tr>
 		<th>Name</th>

@@ -193,7 +193,7 @@
 		<div class="box">
 	    <fieldset>
 	      <legend><h3><span>Current Users</span></h3></legend>
-	      <table id="current-users" class="display">
+	      <table id="current-users" class="table table-striped table-bordered nowrap">
 	        <thead>
 	          <tr>
 	            <th>First Name</th>

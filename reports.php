@@ -1,6 +1,7 @@
 <?php
   session_start();
   require_once "inc/dbconnect.php";
+  require "inc/dynamicDropdown.php";
   require "inc/sessionVerify.php";
 	require "inc/report-query.php";
 	require "inc/util.php";
@@ -100,15 +101,43 @@
 </nav>
 <div class="container text-center">
   <div class="box">
-    <div class="row justify-content-center align-items-center h-100">
-  		<div id="report" class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-  			<label for="report-title">Report Name</label>
-  			<input type="textbox" id="report-name" name="report-title" class="form-control" style="text-align: center" placeholder="Title">
-  		</div>
-    </div>
-  </div>
+    <div id="canned-report-selector">
+      <form action="" method ="POST">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="form-group col-15">
+          <?php
+             $manus = loadManufacturers();
+             foreach($manus as $manu)
+             {
+               print '<div class="form-check form-check-inline">';
+               print "<input class='form-check-input' type='radio' name='cr-radio' id='".$manu['ManufacturerName']."' value='".$manu['ManufacturerName']."'>";
+               print "<label class='form-check-label' for='".$manu['ManufacturerName']."'>".$manu['ManufacturerName']."</label>";
+               print '</div>';
+             }
+          ?>
+         </div>
+       </div>
+     </form>
+     <p id="stuff"></p>
+   </div>
+   <!-- <table id="cr-report-table" class="table table-striped table-bordered">
+    <thead>
+      <th>Model</th>
+      <th>Qty</th>
+    </thead>
+    <tbody id="cr-report-body" name="cr-report-body"></tbody>
+  </table> -->
+</div>
+</div>
+ <div class="container text-center">
   <div class="box">
-    <table id="report-table" class="table table-bordered dt-responsive nowrap">
+    <div class="row justify-content-center align-items-center h-100">
+      <div id="report">
+        <label for="report-title">Report Name</label>
+        <input type="textbox" id="report-name" name="report-title" class="form-control" style="text-align: center" placeholder="Title">
+      </div>
+    </div>
+    <table id="report-table" class="table table-striped table-bordered nowrap">
 			<thead>
 				<tr>
 					<th>Service Tag</th>

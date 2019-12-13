@@ -4,6 +4,12 @@
     require "inc/sessionVerify.php";
     require "inc/count_and_verify.php";
     require "inc/util.php";
+
+	$ldate = date("Y-m-d", strtotime("now"));
+	if(isset($_POST['curDate']))
+	{
+		$_SESSION['currentDate'] = $_POST['curDate'];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +64,9 @@
 
   <!-- Main JS -->
   <script src="js/home.js"></script>
-
+  <script>
+	var currentDate = "<?php echo $_POST['curDate'];?>";
+  </script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -135,13 +143,13 @@
       <table id="verify-table" class="table table-striped table-bordered nowrap">
         <thead>
           <tr>
+            <th>Verify</th>
             <th>Service Tag</th>
             <th>Model No.</th>
             <th>Network Name</th>
             <th>Location</th>
+      			<th>Last Name</th>
             <th>First Name</th>
-            <th>Last Name</th>
-            <th>Verify</th>
           </tr>
         </thead>
         <tbody>
@@ -149,7 +157,7 @@
             for($i = 0; $i < sizeof($VST); $i++)
             {
               print '<tr>';
-              print '<td>'.$VST[$i].'</td><td>'.$VMN[$i].'</td><td>'.$VNN[$i].'</td><td>'.$VLoc[$i].'</td><td>'.$VFN[$i].'</td><td>'.$VLN[$i].'</td><td></td>';
+              print '<td></td><td>'.$VST[$i].'</td><td>'.$VMN[$i].'</td><td>'.$VNN[$i].'</td><td>'.$VLoc[$i].'</td><td>'.$VFN[$i].'</td><td>'.$VLN[$i].'</td>';
               print '</tr>';
             }
           ?>

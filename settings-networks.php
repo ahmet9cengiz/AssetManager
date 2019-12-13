@@ -154,7 +154,7 @@
 	<div class="box">
 		<fieldset>
 			<legend><h3><span>Networks</span></h3></legend>
-			<table id="current-networks" class="display">
+			<table id="current-networks" class="table table-striped table-bordered nowrap">
 				<thead>
 					<tr>
 					<th>Network Name</th>
