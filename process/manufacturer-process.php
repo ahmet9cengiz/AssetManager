@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once "../dbconnect.php";
+  require_once "../inc/dbconnect.php";
   $msg='';
 
   $stmt = null;
@@ -66,8 +66,8 @@
       $count = $row->C;
       if($count == 1)
       {
-        $stmt = $con->prepar("call Delete_Manufacturer(?);");
-        $stmt->execute($d_manu);
+        $stmt = $con->prepare("call Delete_Manufacturer(?);");
+        $stmt->execute(array($d_manu));
         $msg = "Manufacturer successfully deleted.";
         $_SESSION['msg'] = $msg;
         header("location:../settings-manufacturers.php");

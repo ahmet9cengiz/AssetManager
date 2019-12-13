@@ -21,12 +21,8 @@
 		$network = $_POST['add-network'];
 		$category = $_POST['add-category'];
 		$manufacturer = $_POST['add-manufacturer'];
-
-		if(isset($_POST['surplus'])){
-			$surplus = 1;
-		}else{
-			$surplus = 0;
-		}
+		$surplus = 0;
+		
 
 
 
@@ -166,5 +162,17 @@
 			$_SESSION['msg'] = $msg;
 			header("location:../asset-manager.php");
 		}
+	}
+
+	if(isset($_POST['edit-verify']))
+	{
+		$stmt = null;
+		$e_st = $_POST['edit-st'];
+		$e_vdays = $_POST['edit-vday'];
+		$stmt = $con->prepare("call Set_VerificationDays(?, ?);");
+		$stmt->execute(array($e_st, $e_vdays));
+		$msg = "Verification days for ".$e_st." succesfully updated to ".$e_vdays.".";
+		$_SESSION['msg'] = $msg;
+		header("location:../asset-manager.php");
 	}
 ?>

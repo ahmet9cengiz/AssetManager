@@ -1,5 +1,5 @@
 <?php
-	require_once "inc/dbconnect.php";
+	require_once "../inc/dbconnect.php";
 	$tag = $_POST['tag'];	
 	$ldate = date("Y-m-d");
 	$stmt = $con->prepare("call GetVerifyDays('$tag');");
