@@ -30,9 +30,6 @@
       $purchase = $_SESSION['purchase'];
       $warranty = $_SESSION['warranty'];
       $verifyDays = $_SESSION['verifyDays'];
-      $surplus = $_SESSION['surplus'];
-      $location = $_SESSION['location'];
-      $network = $_SESSION['network'];
       $notes = $_SESSION['notes'];
       unset($_SESSION['duplicate']); //unset the duplicate session variable each time
     }
@@ -245,7 +242,7 @@
           <li style="float: none; display: inline-block;"><a href="#edit-verify">Edit Verify</a></li>
         </ul>
         <div id="add-asset">
-          <form action="process/asset-process.php" method ="POST">
+        <form action="process/asset-process.php" method ="POST">
             <div class="row justify-content-center align-items-center h-100">
               <div class="form-group col-3">
                 <label for="service-tag">Service Tag</label>
@@ -254,7 +251,6 @@
               <div class="form-group col-3">
                 <label for="add-category">Category</label>
                 <select id="add-category" class="form-control" name="add-category">
-                  <option disabled = "" selected = "">Select Category</option>
                   <?php
                   $categories = loadCategories();
                   foreach ($categories as $category)
@@ -267,7 +263,6 @@
               <div class="form-group col-3">
                 <label for="add-manufacturer">Manufacturer</label>
                 <select id="add-manufacturer" class="form-control" name="add-manufacturer">
-                  <option disabled="" selected="">Select Manufacturer</option>
                   <?php
                   $manufacturers = loadManufacturers();
                   foreach ($manufacturers as $manufacturer)
@@ -280,37 +275,10 @@
               <div class="form-group col-3">
                 <label for="model">Model</label>
                 <select id = "model" class="form-control" name = "model" required>
-                  <option disabled = "" selected = "">Select Model</option>
                 </select>
               </div>
             </div>
             <div class="row justify-content-center align-items-center h-100">
-              <div class="form-group col-3">
-                <label for="add-location">Location</label>
-                <select id="add-location" class="form-control" name="add-location">
-                  <option disabled="" selected="">Select location</option>
-                  <?php
-                    $locations = loadLocations();
-                    foreach ($locations as $location)
-                    {
-                      echo "<option id = '" . $location['LocationID'] . "'value = '" . $location['LocationName'] . "'>" . $location['LocationName'] . "</option>";
-                    }
-                  ?>
-                </select>
-              </div>
-              <div class="form-group col-3">
-                <label for="add-network">Network</label>
-                <select id="add-network" class="form-control" name="add-network">
-                  <option disabled="" selected="">Select Network</option>
-                  <?php
-                  $networks = loadNetworks();
-                  foreach ($networks as $network)
-                  {
-                    echo "<option id = '" . $network['NetworkID'] . "'value = '" . $network['NetworkName'] . "'>" . $network['NetworkName'] . "</option>";
-                  }
-                  ?>
-                </select>
-              </div>
               <div class="form-group col-3">
                 <label for="purchase-date">Purchase Date</label>
                 <input type="date" name="purchase-date" class="form-control" value="<?php echo ($purchase == NULL) ? "" : $purchase; ?>" required>
@@ -329,10 +297,6 @@
                 <label for="notes">Notes</label>
                 <textarea type="message" name="notes" class="form-control" cols="25" rows="1" maxlength="500"><?php echo ($notes == NULL) ? "" : $notes; ?></textarea><br>
               </div>
-<!--              <div class="form-check col-1" style="margin-left: 4px;">
-                <input type="checkbox" id="surplus" class="form-check-input" name="surplus" value="yes">
-                <label for="surplus" class="form-check-label">Surplus</label>
-              </div>-->
             </div>
             <input type="submit" class="form-control-inline" name="add-asset" value="Add" id="add-asset">
             <input type="submit" class="form-control-inline" name="add-duplicate-asset" value="Duplicate" id="add-duplicate-asset">

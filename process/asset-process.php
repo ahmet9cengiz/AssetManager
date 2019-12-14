@@ -17,8 +17,8 @@
 		$notes = $_POST['notes'];
 		$firstname = 'None';
 		$lastname = 'None';
-		$location = $_POST['add-location'];
-		$network = $_POST['add-network'];
+		$location = 'Tech Shelf';
+		$network = 'None';
 		$category = $_POST['add-category'];
 		$manufacturer = $_POST['add-manufacturer'];
 		$surplus = 0;
@@ -36,8 +36,6 @@
 			$_SESSION['verifyDays'] = $verification_days;
 			$_SESSION['surplus'] = $surplus;
 			$_SESSION['notes'] = $notes;
-			$_SESSION['location'] = $location;
-			$_SESSION['network'] = $network;
 		}
 
 		//

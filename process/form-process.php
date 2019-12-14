@@ -6,16 +6,17 @@
     if(isset($_GET['file'])){
         $filename = $_GET['file'];
         if($filename != "no pdf"){
-            $fileDestination = '../loanForms/' . $fileUniqName;
-            if(!empty($filename) && file_exists($filePath)){
+            $fileDestination = '../loanForms/' . $filename;
+            if(!empty($filename) && file_exists($fileDestination)){
                 //Define headers
                 header("Cache-Control: public");
                 header("Content-Description: FIle Transfer");
                 header("Content-Disposition: attachment; filename=LoanAgreement.pdf");
                 header("Content-Type: application/zip");
                 header("Content-Transfer-Emcoding: binary");
-                readfile($filePath);
+                readfile($fileDestination);
                 exit;
+                
             }
         }
         else{
